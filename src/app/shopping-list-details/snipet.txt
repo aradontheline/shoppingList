@@ -1,0 +1,22 @@
+<span>{{item.title}}</span> 
+        <span *ngIf="item.done">
+          <span class="checkbox pull-right">
+            <label for=""><input type="checkbox" [checked]="true" disabled></label>
+          </span>
+        </span>
+        <span *ngIf="!item.done" class="pull-right">
+          <div class="row">
+            <div class="col-sm-6">{{item.title}}</div>
+            <div class="col-sm-6" *ngIf="!item.done">
+              <span class="checkbox">
+                <label><input type="checkbox" [(ngModel)]="itemDoneState[i]"></label>
+              </span>
+              <input type="text" >
+              <span>
+                  <span class="btn btn-xs btn-default" (click)="updateItem(item.id,itemDoneState[i])">
+                      update
+                  </span>
+              </span>
+            </div>
+          </div>
+        </span>      

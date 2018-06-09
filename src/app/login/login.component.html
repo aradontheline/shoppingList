@@ -1,0 +1,25 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Input your credentials</div>
+  <div class="panel-body">
+    <form action="">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input type="password" class="form-control" id="pass" [(ngModel)]="user.pass" name="pass">
+      </div>
+      <div class="checkbox">
+        <label for="">
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+      <button type="submit" class="btn btn-default" (click)="login()">Login</button>
+      <p>
+          <a routerLink="/forgot-pass">Forgot Password</a>
+      </p>
+    </form>
+
+  </div>
+</div>

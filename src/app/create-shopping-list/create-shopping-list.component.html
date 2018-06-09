@@ -1,0 +1,12 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Create a new shopping list</div>
+  <div class="panel-body">
+    <form action="">
+      <div class="form-group">
+        <label for="shoppingList">Shopping list name:</label>
+        <input type="text" class="form-control" id="shoppingList" [(ngModel)]="shoppingList" name="shoppingList" autofocus>
+      </div>
+      <button type="submit" class="btn btn-default" (click)="createShoppingList()">Create</button>
+    </form>
+  </div>
+</div>

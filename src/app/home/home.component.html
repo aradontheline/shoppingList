@@ -1,0 +1,8 @@
+<a class='btn btn-default' href="/create-shopping-list">Create shopping list</a>
+<hr>
+<ul class="list-groupt" *ngIf="lists">
+    <li class="list-group-item">Shopping Lists</li>
+    <li class="list-group-item" *ngFor="let list of lists">
+        <a href="shopping-list-details/{{list.id}}" class="btn">{{list.name}}</a>
+        </li>
+</ul>

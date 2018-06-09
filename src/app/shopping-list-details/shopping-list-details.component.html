@@ -1,0 +1,74 @@
+<div class="panel panel-default" *ngIf="shoppingList">
+  <div class="panel-heading">{{shoppingList.name}} shopping list owned by {{shoppingList.owner}}</div>
+  <div class="panel-heading">
+    Members: 
+    <span *ngIf="shoppingListMembers">
+      <span *ngFor="let member of shoppingListMembers">{{member.username}},</span>
+    </span>
+    <hr>
+    <form action="">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Add shopping item" [(ngModel)]="shoppingItem" name="shoppingItem">
+        <span class="input-group-addon btn" (click)="addShoppingItem()"><i class="glyphicon glyphicon-plus"></i></span>
+      </div>
+    </form>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group" *ngIf="shoppingItems">
+      <li class="list-group-item" *ngFor="let item of shoppingItems;let i = index">
+        <div class="row">
+          <div class="col-sm-2">{{item.title}}</div>
+          <div class="col-sm-10" *ngIf="item.done">
+            <div class="row">
+              <div class="col-sm-2">
+                <input type="checkbox" [checked]="true" disabled>
+              </div>
+              <div class="col-sm-3">
+                Price:{{item.price}}
+              </div>
+              <div class="col-sm-4">
+                Done by {{item.doneBy}}
+              </div>
+              <div class="col-sm-3" *ngIf="currentUser == item.doneBy">
+                <button type="submit" class="btn btn-danger pull-right" (click)="deleteItem(item.id)">Delete</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10" *ngIf="!item.done">
+            <form class="form-inline" action="">
+              <div class="checkbox">
+                <label><input type="checkbox" [(ngModel)]="itemDoneState[i]" name="itemDoneState[{{i}}]"> Done </label>
+              </div>
+              <div class="form-group" *ngIf="itemDoneState[i]">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" [(ngModel)]="itemPrice[i]" name="itemPrice[{{i}}]">
+              </div>
+              <button type="submit" class="btn btn-danger pull-right" (click)="deleteItem(item.id)">Delete</button>
+              <button *ngIf="itemDoneState[i] && itemPrice[i] && (itemPrice[i]>0)" type="submit" class="btn btn-default pull-right" (click)="updateItem(item.id,itemDoneState[i],itemPrice[i])">Update</button>
+            </form>
+          </div>
+        </div> 
+      </li>
+    </ul>
+    <div>
+      Sum:{{shoppingItemsTotalPrice}}
+    </div>
+  </div>
+</div>
+<form action="">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Add new member" [(ngModel)]="search" name="search">
+    <span class="input-group-addon btn" (click)="searchUsers()"><i class="glyphicon glyphicon-search"></i></span>
+  </div>
+</form>
+<hr>
+<ul class="list-group" *ngIf="foundUsers">
+  <li class="list-group-item list-group-item-info pressable" *ngFor="let user of foundUsers">
+    {{user.email}}
+    <span class="pull-right">
+        <span class="btn btn-xs btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true" (click)="addMember(user.id)"></span>
+        </span>
+    </span>
+  </li> 
+</ul>
